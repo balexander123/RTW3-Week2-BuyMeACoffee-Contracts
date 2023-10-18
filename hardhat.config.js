@@ -6,6 +6,7 @@ require("dotenv").config()
 // Go to https://hardhat.org/config/ to learn more
 
 const GOERLI_URL = process.env.GOERLI_URL;
+const SEPOLIA_URL = process.env.SEPOLIA_URL;
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 
 /**
@@ -16,6 +17,10 @@ module.exports = {
   networks: {
     goerli: {
       url: GOERLI_URL,
+      accounts: [PRIVATE_KEY]
+    },
+    sepolia: {
+      url: SEPOLIA_URL,
       accounts: [PRIVATE_KEY]
     }
   }

@@ -22,7 +22,7 @@ contract BuyMeACoffee {
     
     // Address of contract deployer. Marked payable so that
     // we can withdraw to this address later.
-    address payable owner;
+    address payable immutable owner;
 
     // List of all memos received from coffee purchases.
     Memo[] memos;
@@ -70,6 +70,7 @@ contract BuyMeACoffee {
      * @dev send the entire balance stored in this contract to the owner
      */
     function withdrawTips() public {
+        require(msg.sender == owner, "only owner can set price");
         require(owner.send(address(this).balance));
     }
 }
