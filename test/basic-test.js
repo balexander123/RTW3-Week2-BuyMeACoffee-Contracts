@@ -92,11 +92,9 @@ describe("BuyMeACoffee", accounts => {
         const expectedFinalBalance = initialOwnerBalance.add(initialContractBalance).sub(gasCost);
         assert.equal(finalOwnerBalance.toString(), expectedFinalBalance.toString(), 'Owner balance did not increase correctly');
     });
-    
+
     it('should not allow non-owner to withdraw', async () => {
         // Get the owner of the contract
-        const OWNER = await buyMeACoffee.getOwner();
-   
         const BUYER_NAME = "Joe Blow";
         const MESSAGE = "Thanks dude!";
         const ETHER_AMOUNT = '1';
