@@ -1,5 +1,6 @@
 const hre = require("hardhat");
 const abi = require("../artifacts/contracts/BuyMeACoffee.sol/BuyMeACoffee.json");
+require("dotenv").config()
 
 async function getBalance(provider, address) {
   const balanceBigInt = await provider.getBalance(address);
@@ -11,10 +12,23 @@ async function main() {
   const contractAddress="0xDBa03676a2fBb6711CB652beF5B7416A53c1421D";
   const contractABI = abi.abi;
 
-  // Get the node connection and wallet connection.
-  const provider = new hre.ethers.providers.AlchemyProvider("goerli", process.env.GOERLI_API_KEY);
+  const networks = {
+    goerli: process.env.GOERLI_URL,
+    sepolia: process.env.SEPOLIA_URL
+  };
+  
+  // Get network name from command line arguments
+  let networkName = 'sepolia'; // default to 'sepolia' if HARDHAT_NETWORK is not provided
 
-  // Ensure that signer is the SAME address as the original contract deployer,
+  if (!process.env.HARDHAT_NETWORK) {
+    networkName = process.env.HARDHAT_NETWORK;
+  };
+
+  if (!networks[networkName]) {
+    throw new Error(`Unsupported network: ${networkName}`);
+  }
+  
+  const provider = new hre.ethers.providers.JsonRpcProvider(networks[networkName]);  // Ensure that signer is the SAME address as the original contract deployer,
   // or else this script will fail with an error.
   const signer = new hre.ethers.Wallet(process.env.PRIVATE_KEY, provider);
 
