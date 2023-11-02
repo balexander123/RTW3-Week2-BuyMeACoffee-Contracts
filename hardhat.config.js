@@ -8,7 +8,9 @@ require("dotenv").config()
 const GOERLI_URL = process.env.GOERLI_URL;
 const SEPOLIA_URL = process.env.SEPOLIA_URL;
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
-
+const TEST1_PRIVATE_KEY = process.env.TEST1_PRIVATE_KEY;
+const TEST2_PRIVATE_KEY = process.env.TEST2_PRIVATE_KEY;
+const TEST3_PRIVATE_KEY = process.env.TEST3_PRIVATE_KEY;
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
@@ -21,7 +23,10 @@ module.exports = {
     },
     sepolia: {
       url: SEPOLIA_URL,
-      accounts: [PRIVATE_KEY]
+      accounts: [PRIVATE_KEY,
+        TEST1_PRIVATE_KEY,
+        TEST2_PRIVATE_KEY,
+        TEST3_PRIVATE_KEY]
     }
   }
 };
